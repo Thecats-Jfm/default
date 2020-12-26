@@ -1,0 +1,5 @@
+var gene = {
+    run: function(){
+        
+    }
+}
