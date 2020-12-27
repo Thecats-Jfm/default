@@ -12,3 +12,7 @@ harvester
 super_harvester
 repairer
 upgrader
+
+文件名第一个单词首字母大写
+
+变量名每个单词首字母大写
