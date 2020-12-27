@@ -1,7 +1,6 @@
 var CreepsWay = require('Creeps.way');
 var roleCarrier = {
     run: function(creep){
-        creep.say('c');
         if(creep.memory.carring && creep.store[RESOURCE_ENERGY]==0){
             creep.memory.carring = false;
         }

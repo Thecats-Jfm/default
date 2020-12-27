@@ -1,6 +1,5 @@
 var roleHarvester = {
     run: function(creep,id){
-        creep.say('h');
         if(creep.store.getFreeCapacity()>0){
             var sources = creep.room.find(FIND_SOURCES);
             if(id<=2){

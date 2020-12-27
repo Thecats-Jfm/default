@@ -1,7 +1,6 @@
 var CreepsWay = require("Creeps.way");
 var roleRepairer = {
     run: function(creep){
-        creep.say("r");
         if(creep.memory.repairing &&creep.store[RESOURCE_ENERGY] == 0){
             creep.memory.repairing = false;
         }

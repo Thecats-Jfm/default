@@ -1,12 +1,12 @@
 var builder_num = 5;
-var builder_set = [WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE];
-var carrier_num = 1;
-var carrier_set = [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE];
+var builder_set = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //550
+var carrier_num = 3;
+var carrier_set = [CARRY,CARRY,MOVE]; //450
 var harvester_num = 4;
-var harvester_set = [WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE];
+var harvester_set = [WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE]; //500
 var repairer_num = 1;
 var repairer_set = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE];
-var upgrader_num = 2;
+var upgrader_num = 1;
 var upgrader_set = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,CARRY];
 
 var LOG_ = true;

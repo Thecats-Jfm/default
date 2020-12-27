@@ -1,7 +1,6 @@
 var CreepsWay = require('Creeps.way');
 var roleBuilder = {
     run: function(creep){
-        creep.say("b");
         if(creep.memory.building &&creep.store[RESOURCE_ENERGY] == 0){
             creep.memory.building = false;
         }

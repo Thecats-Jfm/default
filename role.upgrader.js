@@ -1,6 +1,6 @@
+var CreepsWay = require("Creeps.way");
 var roleUpgrader = {
     run:function(creep){
-        creep.say("u");
         if(creep.memory.upgrading&&creep.store[RESOURCE_ENERGY]==0){
             creep.memory.upgrading = false;
         }
@@ -13,10 +13,7 @@ var roleUpgrader = {
             }
         }
         else{
-            var source = creep.room.find(FIND_SOURCES)[1];
-            if(creep.harvest(source)==ERR_NOT_IN_RANGE){
-                creep.moveTo(source);
-            }
+            CreepsWay.WithdrawFromContainers(creep);
         }
     }
 }
