@@ -1,16 +1,27 @@
-var builder_num = 4;
-var builder_set = [WORK,MOVE,CARRY];
-var harvester_num = 8;
-var harvester_set = [WORK,MOVE,CARRY];
-var upgrader_num = 5;
-var upgrader_set = [WORK,MOVE,CARRY];
-var LOG = true;
+var builder_num = 5;
+var builder_set = [WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE];
+var carrier_num = 1;
+var carrier_set = [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE];
+var harvester_num = 4;
+var harvester_set = [WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE];
+var repairer_num = 1;
+var repairer_set = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE];
+var upgrader_num = 2;
+var upgrader_set = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,CARRY];
+
+var LOG_ = true;
+var LOG
 var Generator = {
     run: function(){
+        LOG = LOG_;
+        if(Game.time%5!=0) LOG =false;
         if(LOG) console.log('****Generator_begin****');
         this.TrySpawn(builder_num,builder_set,'builder');
+        this.TrySpawn(carrier_num,carrier_set,'carrier');
         this.TrySpawn(harvester_num,harvester_set,'harvester');
+        this.TrySpawn(repairer_num,repairer_set,'repairer');
         this.TrySpawn(upgrader_num,upgrader_set,'upgrader');
+
         if(Game.spawns['Spawn0'].spawning){
             var spawningCreep = Game.creeps[Game.spawns['Spawn0'].spawning.name];
             Game.spawns['Spawn0'].room.visual.text(

@@ -1,3 +1,4 @@
+var CreepsWay = require('Creeps.way');
 var roleBuilder = {
     run: function(creep){
         creep.say("b");
@@ -9,19 +10,12 @@ var roleBuilder = {
         }
 
         if(creep.memory.building){
-            var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if(targets.length){
-                if(creep.build(targets[0])==ERR_NOT_IN_RANGE){
-                    creep.moveTo(targets[0]);
-                }
-            }
+            var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+            CreepsWay.BuildTarget(creep, target);
 
         }
         else{
-            var source = creep.room.find(FIND_SOURCES)[0];
-            if(creep.harvest(source)==ERR_NOT_IN_RANGE){
-                creep.moveTo(source);
-            }
+            CreepsWay.WithdrawFromContainers(creep);
         }
     }
 }
