@@ -13,7 +13,7 @@ module.exports.loop = function () {
 	CreepsGenerator.run();
 	MemoryClear.run();
 	RoomsAct.run(Game.spawns['Spawn0'].room);
-	if(Game.time%100==0) LogShow.run();
+	if(Game.time%1000==0) LogShow.run();
 	var id = 0;
 	for(var name in Game.creeps){
 		var creep = Game.creeps[name];

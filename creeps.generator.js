@@ -1,14 +1,14 @@
-var builder_num = 1;
-var builder_set = [WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; //600
+var builder_num = 3;
+var builder_set = [WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //600
 var carrier_num = 2;
 var carrier_set = [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]; //300
 var harvester_num = 4;
 var harvester_set = [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE]; //600
-var repairer_num = 1;
+var repairer_num = 0;
 var repairer_set = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE];
-var transmitter_num = 1;
-var transmitter_set = [CARRY,CARRY,MOVE]; //150
-var upgrader_num = 3;
+var transmitter_num = 0;
+var transmitter_set = [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]; //150
+var upgrader_num = 2;
 var upgrader_set = [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY]; //800
 
 const LOG_ = true;
@@ -16,7 +16,7 @@ var LOG
 var Generator = {
     run: function(){
         LOG = LOG_;
-        if(Game.time%100!=0) LOG =false;
+        if(Game.time%1000!=0) LOG =false;
         if(LOG) console.log('****Generator_begin****');
         this.TrySpawn(builder_num,builder_set,'builder');
         this.TrySpawn(carrier_num,carrier_set,'carrier');
@@ -42,7 +42,7 @@ var Generator = {
             let newName = role + Game.time;
             let ret = Game.spawns['Spawn0'].spawnCreep(role_set,newName,{memory:{role:role}});
             if(ret == 0) console.log('Successfully start spawning ' + newName);
-            else console.log('Failed to Spawn '+ newName + 'with code'+ ret);
+            // else console.log('Failed to Spawn '+ newName + 'with code'+ ret);
         }
     }
 }

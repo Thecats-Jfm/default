@@ -4,8 +4,9 @@ var RoomsAct = {
         let hostiles = room.find(FIND_HOSTILE_CREEPS);
         if(hostiles.length){
             console.log("Warning! "+ hostiles.length + " hostiles in room! ");
-            room.controller.activateSafeMode();
-            console.log("Warning!!!!!!!!!!!! Try to activate SafeMode!");
+            // room.controller.activateSafeMode();
+            // console.log("Warning!!!!!!!!!!!! Try to activate SafeMode!");
+            console.log('Hostile\'s owner is ' + hostiles[0].owner.username);
         }
         TowersAct.run(room);
     }

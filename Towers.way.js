@@ -5,6 +5,7 @@ var TowerWay = {
             filter:(structure) => {
                 return structure.hits< structure.hitsMax
                     && structure.structureType != STRUCTURE_WALL
+                    && structure.structureType != STRUCTURE_RAMPART
             }
         })
         if(closestDamagedStructure) {
