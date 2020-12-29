@@ -14,41 +14,46 @@ var CreepsGenerator = require('Creeps.generator');
 var MemoryClear = require('memory.clear');
 module.exports.loop = function () {
 
-	CreepsGenerator.run(); //5 to do
-	MemoryClear.run();
-	for (let i in MyRooms) RoomsAct.run(Game.rooms[MyRooms[i]]);
-	if(Game.time%1000==0) LogShow.run();
-	//5 to do
-	var id = 0;
-	var t_id = 0;
+
+    MemoryClear.run();
+    CreepsGenerator.run(); //7 to do
+
+    for (let i in MyRooms) RoomsAct.run(Game.rooms[MyRooms[i]]);
+    // LogShow.run();
+
+	var id = [0,0,0,0,0,0,0,0];
 	for(var name in Game.creeps){
 		var creep = Game.creeps[name];
 		if(creep.memory.role == 'attacker'){
+            let tid = id[0]++;
 			creep.say("PAY!");
 			creep.moveTo(Game.flags['0_0']);
 			let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-			creep.attack(target);
+            creep.attack(target);
 		}
 		else if(creep.memory.role == 'builder'){
-			RoleBuilder.run(creep);
-			//CreepsWay.MoveToFlag(creep,Game.flags['0_0']);
+			let tid = id[1]++;
+			RoleBuilder.run(creep,tid);
 		}
 		else if(creep.memory.role == 'carrier'){
-			RoleCarrier.run(creep);
+            let tid = id[2]++; ;
+			RoleCarrier.run(creep,tid);
 		}
 		else if(creep.memory.role == 'claimer'){
-			creep.say("hi");
+			let tid = id[3]++;
 			creep.memory.dontPullMe = true;
-			RoleClaim.Reserve(creep,Game.flags['Farm1_Controller']);
+			// RoleClaim.Reserve(creep,Game.flags['Farm1_Controller']);
 			// creep.signController(Game.flags['Farm1_Controller'].room.controller,"I'm A SMALL WEAK CUTE CAT! Don't F**K ME PLZ! QwQ");
+			creep.reserveController(creep.room.controller);
+			// creep.moveTo(Game.flags['Farm1_Controller']);
 		}
 		else if(creep.memory.role == 'harvester'){
-			id++;
+			let tid = id[4]++;
 			creep.memory.dontPullMe = true;
-			RoleHarvester.run(creep,id);
+			RoleHarvester.run(creep,tid);
 		}
 		else if(creep.memory.role == 'remoteharvester'){
-			creep.say("RH");
+			let tid = id[5]++;
 			creep.memory.dontPullMe = true;
 			let tp = Game.getObjectById('5feababfdd025bc3ef8ea38f');
 			let tp2 = Game.getObjectById('')
@@ -64,9 +69,8 @@ module.exports.loop = function () {
 			RoleRepairer.run(creep);
 		}
 		else if(creep.memory.role == 'transmitter'){
-			RoleTransmitter.run(creep,t_id);
+			RoleTransmitter.run(creep,1);
 			// creep.moveTo(Game.flags['0_0']);
-			t_id += 1;
 		}
 		else if(creep.memory.role == 'upgrader'){
 			RoleUpgrader.run(creep);

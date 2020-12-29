@@ -1,5 +1,8 @@
+const cfg = [0,1];
+const TargetFlag = ['Farm1'];
 var roleClaimer = {
-    Reserve: function(creep,flag){
+    Reserve: function(creep,id){
+        let flag = Game.flags[TargetFlag[cfg[id]]];
         if(flag.room == undefined) creep.moveTo(flag);
         else{
             let target = flag.room.controller;

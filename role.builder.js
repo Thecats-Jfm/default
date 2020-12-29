@@ -1,18 +1,11 @@
-const BuildFlagList = ['Build1'];
-const SourceFlagList = ['Build1_Source'];
-const cnt = [0];
+const BuildFlagList = ['B1_R'];
+const SourceFlagList = ['B1_S'];
+const cfg = [0,0,0,0,0,0];
 var CreepsWay = require('Creeps.way');
 var roleBuilder = {
-    run: function(creep){
-        if(creep.memory.building &&creep.store[RESOURCE_ENERGY] == 0) creep.memory.building = false;
-        if(!creep.memory.building && creep.store.getFreeCapacity()==0) creep.memory.building = true;
-
-        if(creep.memory.building){
-            CreepsWay.BuildFlagRoom(creep,Game.flags[BuildFlagList[0]]);
-        }
-        else{
-            CreepsWay.WithdrawFromFlag(creep,Game.flags[SourceFlagList[0]]);
-        }
+    run: function(creep,id){
+        if(creep.store[RESOURCE_ENERGY]>0) CreepsWay.BuildFlagRoom(creep,Game.flags[BuildFlagList[cfg[id]]]);
+        else CreepsWay.WithdrawFromFlag(creep,Game.flags[SourceFlagList[cfg[id]]]);
     }
 }
 

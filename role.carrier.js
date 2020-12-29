@@ -1,16 +1,11 @@
 var CreepsWay = require('Creeps.way');
 var roleCarrier = {
-    run: function(creep){
-        if(creep.memory.carring && creep.store[RESOURCE_ENERGY]==0){
-            creep.memory.carring = false;
-        }
-        if(!creep.memory.carring && creep.store.getFreeCapacity()==0){
-            creep.memory.carring = true;
-        }
+    run: function(creep,id){
 
 
 
-        if(!creep.memory.carring){
+
+        if(creep.store[RESOURCE_ENERGY]==0){
             CreepsWay.WithdrawFromStorage(creep);
         }
         else{
