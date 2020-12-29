@@ -1,34 +1,56 @@
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-
-module.exports.loop = function () {
-
-    var tower = Game.getObjectById('2b5399a6baf77e7344b60d2b');
-    if(tower) {
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
+var CreepsWay = require('Creeps.way');
+const StartFlagList = ['Transfer1_Start'];
+const EndFlagList = ['Transfer1_End'];
+const nid=0;
+const cnt = [0];
+var roleTransmitter = {
+    run: function(creep){
+        creep.say("new way");
+        if(creep.memory.carring && creep.store[RESOURCE_ENERGY]==0){
+            creep.memory.carring = false;
         }
-
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            tower.attack(closestHostile);
+        if(!creep.memory.carring && creep.store.getFreeCapacity()==0){
+            creep.memory.carring = true;
         }
-    }
-
-    for(var name in Game.creeps) {
-        var creep = Game.creeps[name];
-        if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
+        if(!creep.memory.carring){
+            let flag = Game.flags[StartFlagList[cnt[nid]]];
+            if(flag.room!=creep.room){
+                creep.moveTo(flag);
+                creep.say("CR");
+                return ;
+            }
+            let source = flag.pos.findClosestByPath(FIND_STRUCTURES,{
+                filter:(structure) =>{
+                    return (structure.structureType == STRUCTURE_CONTAINER
+                        || structure.structureType == STRUCTURE_STORAGE)
+                        && structure.store[RESOURCE_ENERGY] > 0
+                }
+            });
+            if(source){
+                if(creep.withdraw(source,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
+                    creep.moveTo(source);
+                }
+            }
         }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
+        else{
+            let flag = Game.flags[EndFlagList[cnt[nid]]];
+            if(flag.room!=creep.room){
+                creep.moveTo(flag);
+                creep.say('CR');
+                return ;
+            }
+            let target = flag.findClosestByRange(FIND_STRUCTURES,{
+                filter:(structure) =>{
+                    return(
+                        (structure.structureType == STRUCTURE_CONTAINER
+                        || structure.structureType == STRUCTURE_STORAGE)
+                        &&structure.store.getFreeCapacity(RESOURCE_ENERGY)>0
+                    )
+                }
+            })
+            CreepsWay.TransferTarget(creep,target);
         }
     }
 }
+
+module.exports = roleTransmitter;

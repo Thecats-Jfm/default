@@ -1,9 +1,10 @@
 var CreepsWay = require('Creeps.way');
-const pos1 = new RoomPosition(35, 7, 'E26N8');
-const pos2 = new RoomPosition(13, 32, 'E26N8');
+const StartFlagList = ['Transfer1_Start'];
+const EndFlagList = ['Transfer1_End'];
+const nid=0;
+const cnt = [0];
 var roleTransmitter = {
     run: function(creep){
-        creep.say('t');
         if(creep.memory.carring && creep.store[RESOURCE_ENERGY]==0){
             creep.memory.carring = false;
         }
@@ -11,12 +12,17 @@ var roleTransmitter = {
             creep.memory.carring = true;
         }
         if(!creep.memory.carring){
-            let source = pos1.findClosestByPath(FIND_STRUCTURES,{
+            let flag = Game.flags[StartFlagList[cnt[nid]]];
+            if(flag.room!=creep.room){
+                creep.moveTo(flag);
+                creep.say("CR");
+                return ;
+            }
+            let source = flag.pos.findClosestByPath(FIND_STRUCTURES,{
                 filter:(structure) =>{
-                    return(
-                        structure.structureType == STRUCTURE_CONTAINER
+                    return (structure.structureType == STRUCTURE_CONTAINER
+                        || structure.structureType == STRUCTURE_STORAGE)
                         && structure.store[RESOURCE_ENERGY] > 0
-                    )
                 }
             });
             if(source){
@@ -24,17 +30,19 @@ var roleTransmitter = {
                     creep.moveTo(source);
                 }
             }
-            else{
-                // console.log(creep.name + " can't find available container.");
-                creep.say('cnc');
-            }
         }
         else{
-            let target = pos2.findClosestByRange(FIND_STRUCTURES,{
+            let flag = Game.flags[EndFlagList[cnt[nid]]];
+            if(flag.room!=creep.room){
+                creep.moveTo(flag);
+                creep.say('CR');
+                return ;
+            }
+            let target = flag.pos.findClosestByRange(FIND_STRUCTURES,{
                 filter:(structure) =>{
                     return(
                         (structure.structureType == STRUCTURE_CONTAINER
-                        )
+                        || structure.structureType == STRUCTURE_STORAGE)
                         &&structure.store.getFreeCapacity(RESOURCE_ENERGY)>0
                     )
                 }

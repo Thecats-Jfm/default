@@ -1,15 +1,23 @@
-var builder_num = 3;
+
+var builder_num = 1;
 var builder_set = [WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //600
 var carrier_num = 2;
-var carrier_set = [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]; //300
+var carrier_set = [CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]; //300
+var claimer_num = 1;
+var claimer_set = [CLAIM,MOVE];//1250
+var cleaner_num = 0;
+var cleaner_set = [WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE]; //600
 var harvester_num = 4;
-var harvester_set = [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE]; //600
-var repairer_num = 0;
-var repairer_set = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE];
-var transmitter_num = 0;
-var transmitter_set = [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]; //150
-var upgrader_num = 2;
-var upgrader_set = [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY]; //800
+var harvester_set = [WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE]; //550
+var remoteharvester_num = 4;
+var remoteharvester_set = [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE] //800
+var repairer_num = 1;
+var repairer_set = [WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];//500
+var transmitter_num = 1;
+var transmitter_set = [CARRY,CARRY,MOVE,]; //300
+var upgrader_num = 3;
+var upgrader_set = [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE]; //700
+
 
 const LOG_ = true;
 var LOG
@@ -20,7 +28,10 @@ var Generator = {
         if(LOG) console.log('****Generator_begin****');
         this.TrySpawn(builder_num,builder_set,'builder');
         this.TrySpawn(carrier_num,carrier_set,'carrier');
+        this.TrySpawn(claimer_num,claimer_set,'claimer');
+        this.TrySpawn(cleaner_num,cleaner_set,'cleaner');
         this.TrySpawn(harvester_num,harvester_set,'harvester');
+        this.TrySpawn(remoteharvester_num,remoteharvester_set,'remoteharvester');
         this.TrySpawn(repairer_num,repairer_set,'repairer');
         this.TrySpawn(transmitter_num,transmitter_set,'transmitter');
         this.TrySpawn(upgrader_num,upgrader_set,'upgrader');

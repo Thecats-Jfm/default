@@ -1,3 +1,5 @@
+const BuildFlagList = ['Build1'];
+const SourceFlagList = ['Room1_Storage'];
 var CreepsWay = require('Creeps.way');
 var roleBuilder = {
     run: function(creep){
@@ -9,12 +11,10 @@ var roleBuilder = {
         }
 
         if(creep.memory.building){
-            var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-            CreepsWay.BuildTarget(creep, target);
-
+            CreepsWay.BuildFlagRoom(creep,Game.flags[BuildFlagList[0]]);
         }
         else{
-            CreepsWay.WithdrawFromContainers(creep);
+            CreepsWay.WithdrawFromFlag(creep,Game.flags[SourceFlagList[0]]);
         }
     }
 }

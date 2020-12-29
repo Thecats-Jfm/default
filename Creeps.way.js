@@ -3,7 +3,8 @@ var CreepsWay = {
         let source = creep.pos.findClosestByPath(FIND_STRUCTURES,{
             filter:(structure) =>{
                 return(
-                    structure.structureType == STRUCTURE_CONTAINER
+                    (structure.structureType == STRUCTURE_CONTAINER
+                    ||structure.structureType == STRUCTURE_STORAGE)
                     && structure.store[RESOURCE_ENERGY] > 0
                 )
             }
@@ -16,6 +17,14 @@ var CreepsWay = {
         else{
             // console.log(creep.name + " can't find available container.");
             creep.say('cnc');
+        }
+    },
+    WithdrawFromFlag: function(creep,flag){
+        if(flag.room!=creep.room){
+            creep.moveTo(flag);
+        }
+        else{
+            this.WithdrawFromContainers(creep);
         }
     },
     //
@@ -65,6 +74,20 @@ var CreepsWay = {
             // console.log(creep.name + "can't find target .");
             creep.say("rnf");
         }
-    }
+    },
+    MoveToFlag: function(creep,flag){
+        let ret = creep.moveTo(flag,{visualizePathStyle:{opacity:1}});
+        creep.say(ret);
+    },
+    BuildFlagRoom: function(creep,flag){
+        if(flag.room != creep.room){
+            creep.moveTo(flag);
+        }
+        else{
+            let target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+            this.BuildTarget(creep,target);
+        }
+    },
+
 }
 module.exports = CreepsWay;

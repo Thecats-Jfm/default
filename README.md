@@ -16,3 +16,12 @@ upgrader
 文件名第一个单词首字母大写
 
 变量名每个单词首字母大写
+
+config
+
+Flag：
+Room1_Storage1
+Farm1_Source1
+Farm1_Controller
+
+Creeps.generator: 生成器
