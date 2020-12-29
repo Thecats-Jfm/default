@@ -1,4 +1,5 @@
-
+var attacker_num = 2;
+var attacker_set = [MOVE,MOVE,ATTACK,ATTACK]
 var builder_num = 0;
 var builder_set = [WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //600
 var carrier_num = 2;
@@ -13,7 +14,7 @@ var remoteharvester_num = 2;
 var remoteharvester_set = [WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE] //800
 var repairer_num = 0;
 var repairer_set = [WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];//500
-var transmitter_num = 14;
+var transmitter_num = 10;
 var transmitter_set = [CARRY,CARRY,MOVE,]; //300
 var upgrader_num = 4;
 var upgrader_set = [WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,]; //700
@@ -26,6 +27,7 @@ var Generator = {
         LOG = LOG_;
         if(Game.time%1000!=0) LOG =false;
         if(LOG) console.log('****Generator_begin****');
+        this.TrySpawn(attacker_num,attacker_set,'attacker');
         this.TrySpawn(builder_num,builder_set,'builder');
         this.TrySpawn(carrier_num,carrier_set,'carrier');
         this.TrySpawn(claimer_num,claimer_set,'claimer');

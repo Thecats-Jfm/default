@@ -23,8 +23,13 @@ module.exports.loop = function () {
 	var t_id = 0;
 	for(var name in Game.creeps){
 		var creep = Game.creeps[name];
-
-		if(creep.memory.role == 'builder'){
+		if(creep.memory.role == 'attacker'){
+			creep.say("PAY!");
+			creep.moveTo(Game.flags['0_0']);
+			let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+			creep.attack(target);
+		}
+		else if(creep.memory.role == 'builder'){
 			RoleBuilder.run(creep);
 			//CreepsWay.MoveToFlag(creep,Game.flags['0_0']);
 		}
