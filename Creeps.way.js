@@ -15,19 +15,32 @@ var CreepsWay = {
             }
         }
         else{
-            // console.log(creep.name + " can't find available container.");
+            creep.say('cnc');
+        }
+    },
+    WithdrawFromPos: function(creep,pos){
+        let source = pos.findClosestByRange(FIND_STRUCTURES,{
+            filter:(structure) =>{
+                return(
+                    (structure.structureType == STRUCTURE_CONTAINER
+                    ||structure.structureType == STRUCTURE_STORAGE)
+                    && structure.store[RESOURCE_ENERGY] > 0
+                )
+            }
+        });
+        if(source){
+            if(creep.withdraw(source,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
+                creep.moveTo(source);
+            }
+        }
+        else{
             creep.say('cnc');
         }
     },
     WithdrawFromFlag: function(creep,flag){
-        if(flag.room!=creep.room){
-            creep.moveTo(flag);
-        }
-        else{
-            this.WithdrawFromContainers(creep);
-        }
+        if(flag.room!=creep.room) creep.moveTo(flag);
+        else this.WithdrawFromPos(creep,flag.pos);
     },
-    //
     TransferTarget : function(creep,target){
         if(target){
             let ret = creep.transfer(target,RESOURCE_ENERGY);
@@ -80,9 +93,7 @@ var CreepsWay = {
         creep.say(ret);
     },
     BuildFlagRoom: function(creep,flag){
-        if(flag.room != creep.room){
-            creep.moveTo(flag);
-        }
+        if(flag.room != creep.room) creep.moveTo(flag);
         else{
             let target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
             this.BuildTarget(creep,target);

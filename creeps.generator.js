@@ -1,5 +1,5 @@
 
-var builder_num = 1;
+var builder_num = 0;
 var builder_set = [WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //600
 var carrier_num = 2;
 var carrier_set = [CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]; //300
@@ -9,14 +9,14 @@ var cleaner_num = 0;
 var cleaner_set = [WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE]; //600
 var harvester_num = 4;
 var harvester_set = [WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE]; //550
-var remoteharvester_num = 4;
-var remoteharvester_set = [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE] //800
-var repairer_num = 1;
+var remoteharvester_num = 2;
+var remoteharvester_set = [WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE] //800
+var repairer_num = 0;
 var repairer_set = [WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];//500
-var transmitter_num = 1;
+var transmitter_num = 18;
 var transmitter_set = [CARRY,CARRY,MOVE,]; //300
-var upgrader_num = 3;
-var upgrader_set = [WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE]; //700
+var upgrader_num = 4;
+var upgrader_set = [WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,]; //700
 
 
 const LOG_ = true;

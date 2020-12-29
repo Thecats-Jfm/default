@@ -20,6 +20,7 @@ module.exports.loop = function () {
 	if(Game.time%1000==0) LogShow.run();
 	//5 to do
 	var id = 0;
+	var t_id = 0;
 	for(var name in Game.creeps){
 		var creep = Game.creeps[name];
 
@@ -44,13 +45,22 @@ module.exports.loop = function () {
 		else if(creep.memory.role == 'remoteharvester'){
 			creep.say("RH");
 			creep.memory.dontPullMe = true;
-			roleRemoteHarvester.run(creep);
+			let tp = Game.getObjectById('5feababfdd025bc3ef8ea38f');
+			let tp2 = Game.getObjectById('')
+			if(tp.hits<tp.hitsMax&&creep.store[RESOURCE_ENERGY]>0){
+				creep.say('repair');
+				CreepsWay.RepairTarget(creep,tp);
+			}
+			else {
+
+			}roleRemoteHarvester.run(creep);
 		}
 		else if(creep.memory.role == 'repairer'){
 			RoleRepairer.run(creep);
 		}
 		else if(creep.memory.role == 'transmitter'){
-			RoleTransmitter.run(creep);
+			RoleTransmitter.run(creep,t_id);
+			t_id += 1;
 		}
 		else if(creep.memory.role == 'upgrader'){
 			RoleUpgrader.run(creep);

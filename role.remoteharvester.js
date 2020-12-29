@@ -13,12 +13,15 @@ var roleRemoteHarvester = {
             }
         }
         else {
-            let flag = Game.flags['Room1_Storage'];
-            if(flag.room == undefined){
-                creep.moveTo(flag);
-            }
+            let flag = Game.flags['Farm1_Storage'];
+            if(flag.room == undefined) creep.moveTo(flag);
             else {
-                let target = flag.pos.findClosestByRange(FIND_MY_STRUCTURES);
+                let target = flag.pos.findClosestByRange(FIND_STRUCTURES,{
+                    filter:(structure) =>{
+                        return (structure.structureType==STRUCTURE_CONTAINER
+                            || structure.structureType==STRUCTURE_STORAGE)
+                    }
+                });
                 let ret =creep.transfer(target,RESOURCE_ENERGY)
                 if(ret == ERR_NOT_IN_RANGE){
                     creep.moveTo(target);
@@ -26,7 +29,6 @@ var roleRemoteHarvester = {
                 else {
                     creep.say(ret);
                 }
-                if(ret == 0) console.log(Game.time,creep.name,'RH_OK');
             }
         }
     }
