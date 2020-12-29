@@ -1,6 +1,6 @@
 var attacker_num = 2;
 var attacker_set = [MOVE,MOVE,ATTACK,ATTACK]
-var builder_num = 0;
+var builder_num = 2;
 var builder_set = [WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //600
 var carrier_num = 2;
 var carrier_set = [CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]; //300
@@ -14,9 +14,9 @@ var remoteharvester_num = 2;
 var remoteharvester_set = [WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE] //800
 var repairer_num = 0;
 var repairer_set = [WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE];//500
-var transmitter_num = 10;
+var transmitter_num = 14;
 var transmitter_set = [CARRY,CARRY,MOVE,]; //300
-var upgrader_num = 4;
+var upgrader_num = 2;
 var upgrader_set = [WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,]; //700
 
 

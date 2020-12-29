@@ -11,7 +11,7 @@ var roleCarrier = {
 
 
         if(!creep.memory.carring){
-            CreepsWay.WithdrawFromContainers(creep);
+            CreepsWay.WithdrawFromStorage(creep);
         }
         else{
             let target = creep.pos.findClosestByRange(FIND_STRUCTURES,{

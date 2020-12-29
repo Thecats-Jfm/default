@@ -1,10 +1,12 @@
 var CreepsWay = {
-    WithdrawFromContainers : function(creep){
+    WithdrawFromStorage : function(creep){
+        creep.say('o');
         let source = creep.pos.findClosestByPath(FIND_STRUCTURES,{
             filter:(structure) =>{
                 return(
                     (structure.structureType == STRUCTURE_CONTAINER
-                    ||structure.structureType == STRUCTURE_STORAGE)
+                    ||structure.structureType == STRUCTURE_STORAGE
+                    ||structure.structureType == STRUCTURE_LINK)
                     && structure.store[RESOURCE_ENERGY] > 0
                 )
             }
@@ -18,75 +20,69 @@ var CreepsWay = {
             creep.say('cnc');
         }
     },
-    WithdrawFromPos: function(creep,pos){
-        let source = pos.findClosestByRange(FIND_STRUCTURES,{
-            filter:(structure) =>{
-                return(
-                    (structure.structureType == STRUCTURE_CONTAINER
-                    ||structure.structureType == STRUCTURE_STORAGE)
-                    && structure.store[RESOURCE_ENERGY] > 0
-                )
-            }
-        });
-        if(source){
-            if(creep.withdraw(source,RESOURCE_ENERGY)==ERR_NOT_IN_RANGE){
-                creep.moveTo(source);
-            }
+    WithdrawFromTarget: function(creep, target){
+        if(target){
+            let ret = creep.withdraw(target,RESOURCE_ENERGY);
+            if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
+            else if(ret!=0) creep.say('WD Er:',ret);
         }
-        else{
-            creep.say('cnc');
-        }
+        else creep.say("WD Nf");
     },
     WithdrawFromFlag: function(creep,flag){
         if(flag.room!=creep.room) creep.moveTo(flag);
-        else this.WithdrawFromPos(creep,flag.pos);
+        else {
+            let target = flag.pos.findInRange(FIND_STRUCTURES,1,{
+                filter:(structure) =>{
+                    return(
+                        (structure.structureType == STRUCTURE_CONTAINER
+                        ||structure.structureType == STRUCTURE_STORAGE
+                        ||structure.structureType == STRUCTURE_LINK)
+                        && structure.store[RESOURCE_ENERGY] > 0
+                    )
+                }
+            })[0];
+            this.WithdrawFromTarget(creep, target);
+        }
     },
     TransferTarget : function(creep,target){
         if(target){
             let ret = creep.transfer(target,RESOURCE_ENERGY);
-            if(ret == ERR_NOT_IN_RANGE){
-                creep.moveTo(target,{visualizePathStyle:
-                    {stroke:'66ccff',opacity:1,lineStyle:'dashed'}});
-            }
-            else if(ret != 0 ){
-                console.log(creep.name + 'transfer ERROR code: ' +ret);
-            }
+            if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
+            else if(ret!=0) creep.say('TF Er:',ret);
         }
-        else{
-            // console.log(creep.name + "can't find target .");
-            creep.say("cnf");
+        else creep.say("TF Nf");
+    },
+    TransferToFlag: function(creep,flag){
+        if(flag.room!=creep.room) creep.moveTo(flag);
+        else {
+            let target = flag.pos.findInRange(FIND_STRUCTURES,1,{
+                filter:(structure) =>{
+                    return(
+                        (structure.structureType == STRUCTURE_CONTAINER
+                        ||structure.structureType == STRUCTURE_STORAGE
+                        ||structure.structureType == STRUCTURE_LINK)
+                        && structure.getFreeCapacity(RESOURCE_ENERGY) > 0
+                    )
+                }
+            })[0];
+            this.TransferTarget(creep, target);
         }
     },
-    //
     BuildTarget : function(creep, target){
         if(target){
             let ret = creep.build(target);
-            if(ret == ERR_NOT_IN_RANGE){
-                creep.moveTo(target);
-            }
-            else if(ret!=0){
-                console.log(creep.name + "build ERROR code: "+ret);
-            }
+            if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
+            else if(ret!=0) creep.say('b Er:',ret);
         }
-        else{
-            // console.log(creep.name + "can't find target .");
-            creep.say("bnf");
-        }
+        else creep.say("b Nf");
     },
     RepairTarget : function(creep, target){
         if(target){
             let ret = creep.repair(target);
-            if(ret == ERR_NOT_IN_RANGE){
-                creep.moveTo(target);
-            }
-            else if(ret!=0){
-                console.log(creep.name + "repair ERROR code: "+ret);
-            }
+            if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
+            else if(ret!=0) creep.say('r Er:',ret);
         }
-        else{
-            // console.log(creep.name + "can't find target .");
-            creep.say("rnf");
-        }
+        else creep.say("r Nf");
     },
     MoveToFlag: function(creep,flag){
         let ret = creep.moveTo(flag,{visualizePathStyle:{opacity:1}});

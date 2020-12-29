@@ -13,7 +13,7 @@ var roleUpgrader = {
             }
         }
         else{
-            CreepsWay.WithdrawFromContainers(creep);
+            CreepsWay.WithdrawFromFlag(creep,Game.flags['U1_S']);
         }
     }
 }

@@ -65,6 +65,7 @@ module.exports.loop = function () {
 		}
 		else if(creep.memory.role == 'transmitter'){
 			RoleTransmitter.run(creep,t_id);
+			// creep.moveTo(Game.flags['0_0']);
 			t_id += 1;
 		}
 		else if(creep.memory.role == 'upgrader'){
