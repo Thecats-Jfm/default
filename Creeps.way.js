@@ -61,7 +61,7 @@ var CreepsWay = {
                         (structure.structureType == STRUCTURE_CONTAINER
                         ||structure.structureType == STRUCTURE_STORAGE
                         ||structure.structureType == STRUCTURE_LINK)
-                        && structure.getFreeCapacity(RESOURCE_ENERGY) > 0
+                         && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
                     )
                 }
             })[0];
@@ -80,9 +80,9 @@ var CreepsWay = {
         if(target){
             let ret = creep.repair(target);
             if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
-            else if(ret!=0) creep.say('r Er:',ret);
+            else if(ret!=0) creep.say('Er:',ret);
         }
-        else creep.say("r Nf");
+        else creep.say("Nf");
     },
     MoveToFlag: function(creep,flag){
         let ret = creep.moveTo(flag,{visualizePathStyle:{opacity:1}});
@@ -95,6 +95,27 @@ var CreepsWay = {
             this.BuildTarget(creep,target);
         }
     },
+    RepairFlagRoom: function(creep,flag){
+        if(flag.room != creep.room) creep.moveTo(flag);
+        else{
+            let target = creep.pos.findClosestByPath(FIND_STRUCTURES,{filter:(structure)=>{
+                return(structure.structureType==STRUCTURE_CONTAINER&&structure.hits<structure.hitsMax-1000)
+                    ||(structure.structureType==STRUCTURE_ROAD&&structure.hits<structure.hitsMax-1000)
+                    ||(structure.structureType==STRUCTURE_RAMPART&&structure.hits<100000)
+                    ||(structure.structureType==STRUCTURE_TOWER&&structure.hits<structure.hitsMax)}
+            });
+            this.RepairTarget(creep,target);
+        }
+    },
+    HarvestFlag: function(creep, flag){
+        if(flag.room!=creep.room) creep.moveTo(flag);
+        else{
+            let target = flag.pos.findInRange(FIND_SOURCES, 1)[0];
+            let ret =creep.harvest(target,RESOURCE_ENERGY);
+            if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
+            else if(ret!=0) creep.say(ret);
+        }
+    }
 
 }
 module.exports = CreepsWay;

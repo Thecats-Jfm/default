@@ -42,9 +42,9 @@ module.exports.loop = function () {
 		else if(creep.memory.role == 'claimer'){
 			let tid = id[3]++;
 			creep.memory.dontPullMe = true;
-			// RoleClaim.Reserve(creep,Game.flags['Farm1_Controller']);
+			RoleClaim.Reserve(creep,tid);
 			// creep.signController(Game.flags['Farm1_Controller'].room.controller,"I'm A SMALL WEAK CUTE CAT! Don't F**K ME PLZ! QwQ");
-			creep.reserveController(creep.room.controller);
+			// creep.reserveController(creep.room.controller);
 			// creep.moveTo(Game.flags['Farm1_Controller']);
 		}
 		else if(creep.memory.role == 'harvester'){
@@ -66,13 +66,17 @@ module.exports.loop = function () {
 			}roleRemoteHarvester.run(creep);
 		}
 		else if(creep.memory.role == 'repairer'){
-			RoleRepairer.run(creep);
+			let tid = id[6]++;
+			RoleRepairer.run(creep,tid);
 		}
 		else if(creep.memory.role == 'transmitter'){
-			RoleTransmitter.run(creep,1);
+			let tid = id[7]++;
+			creep.say('t'+tid);
+			RoleTransmitter.run(creep,tid);
 			// creep.moveTo(Game.flags['0_0']);
 		}
 		else if(creep.memory.role == 'upgrader'){
+			let tid = id[8]++;
 			RoleUpgrader.run(creep);
 		}
 		else if(creep.memory.role =='cleaner'){

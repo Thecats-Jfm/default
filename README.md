@@ -97,3 +97,7 @@ WithdrawFromTarget
 ## WithdrawFromStorage(creep) |Old
 
 在同房间中寻找离creep最近的Storage给她贴贴。
+
+## HarvestFlag(creep,flag)
+
+收割pos==flag.pos的 STRUCTURE_SOURCES
