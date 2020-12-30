@@ -82,7 +82,7 @@ var CreepsWay = {
             if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
             else if(ret!=0) creep.say('Er:',ret);
         }
-        else creep.say("Nf");
+        else creep.say("rnf");
     },
     MoveToFlag: function(creep,flag){
         let ret = creep.moveTo(flag,{visualizePathStyle:{opacity:1}});

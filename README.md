@@ -101,4 +101,3 @@ WithdrawFromTarget
 ## HarvestFlag(creep,flag)
 
 收割pos==flag.pos的 STRUCTURE_SOURCES
-

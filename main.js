@@ -14,7 +14,7 @@ var CreepsGenerator = require('Creeps.generator');
 var MemoryClear = require('memory.clear');
 module.exports.loop = function () {
 
-
+	Game.cpu.generatePixel();
     MemoryClear.run();
     CreepsGenerator.run(); //7 to do
 
@@ -54,17 +54,7 @@ module.exports.loop = function () {
 		}
 		else if(creep.memory.role == 'remoteharvester'){
 			let tid = id[5]++;
-			// 想要合并这个和harvester
-			creep.memory.dontPullMe = true;
-			let tp = Game.getObjectById('5feababfdd025bc3ef8ea38f');
-			let tp2 = Game.getObjectById('')
-			if(tp.hits<tp.hitsMax&&creep.store[RESOURCE_ENERGY]>0){
-				creep.say('repair');
-				CreepsWay.RepairTarget(creep,tp);
-			}
-			else {
-				roleRemoteHarvester.run(creep);
-			}
+			console.log("RH Error");
 		}
 		else if(creep.memory.role == 'repairer'){
 			creep.say('r');
