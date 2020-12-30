@@ -107,13 +107,22 @@ var CreepsWay = {
             this.RepairTarget(creep,target);
         }
     },
-    HarvestFlag: function(creep, flag){
+    HarvestFlag: function(creep,flag){
         if(flag.room!=creep.room) creep.moveTo(flag);
         else{
             let target = flag.pos.findInRange(FIND_SOURCES, 1)[0];
             let ret =creep.harvest(target,RESOURCE_ENERGY);
             if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
             else if(ret!=0) creep.say(ret);
+        }
+    },
+    UpgradeFlag: function(creep,flag){
+        if(creep.room!=flag.room) creep.moveTo(flag);
+        else{
+            let target = flag.room.controller;
+            let ret = creep.upgradeController(target);
+            if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
+            else if(ret!=0) creep.say('Er: '+ret);
         }
     }
 

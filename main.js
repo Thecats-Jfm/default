@@ -19,9 +19,9 @@ module.exports.loop = function () {
     CreepsGenerator.run(); //7 to do
 
     for (let i in MyRooms) RoomsAct.run(Game.rooms[MyRooms[i]]);
-    // LogShow.run();
+    if(Game.time%10==0) LogShow.ShowStorages();
 
-	var id = [0,0,0,0,0,0,0,0];
+	var id = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	for(var name in Game.creeps){
 		var creep = Game.creeps[name];
 		if(creep.memory.role == 'attacker'){
@@ -54,6 +54,7 @@ module.exports.loop = function () {
 		}
 		else if(creep.memory.role == 'remoteharvester'){
 			let tid = id[5]++;
+			// 想要合并这个和harvester
 			creep.memory.dontPullMe = true;
 			let tp = Game.getObjectById('5feababfdd025bc3ef8ea38f');
 			let tp2 = Game.getObjectById('')
@@ -62,10 +63,11 @@ module.exports.loop = function () {
 				CreepsWay.RepairTarget(creep,tp);
 			}
 			else {
-
-			}roleRemoteHarvester.run(creep);
+				roleRemoteHarvester.run(creep);
+			}
 		}
 		else if(creep.memory.role == 'repairer'){
+			creep.say('r');
 			let tid = id[6]++;
 			RoleRepairer.run(creep,tid);
 		}
@@ -77,7 +79,7 @@ module.exports.loop = function () {
 		}
 		else if(creep.memory.role == 'upgrader'){
 			let tid = id[8]++;
-			RoleUpgrader.run(creep);
+			RoleUpgrader.run(creep,tid);
 		}
 		else if(creep.memory.role =='cleaner'){
 			// creep.say(Game.flags['0_0']);
