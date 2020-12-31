@@ -45,6 +45,7 @@ module.exports.loop = function () {
 			let tid = id[3]++;
 			creep.memory.dontPullMe = true;
 			RoleClaimer.Reserve(creep,tid);
+			// RoleClaimer.Sign(creep);
 		}
 		else if(creep.memory.role == 'harvester'){
 			let tid = id[4]++;

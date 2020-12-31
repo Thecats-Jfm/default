@@ -31,17 +31,21 @@ var CreepsWay = {
     WithdrawFromFlag: function(creep,flag){
         if(flag.room!=creep.room) creep.moveTo(flag);
         else {
-            let target = flag.pos.findInRange(FIND_STRUCTURES,1,{
-                filter:(structure) =>{
-                    return(
-                        (structure.structureType == STRUCTURE_CONTAINER
-                        ||structure.structureType == STRUCTURE_STORAGE
-                        ||structure.structureType == STRUCTURE_LINK)
-                        && structure.store[RESOURCE_ENERGY] > 0
-                    )
-                }
-            })[0];
-            this.WithdrawFromTarget(creep, target);
+            let target =flag.pos.findInRange(FIND_DROPPED_RESOURCES,1)[0];
+            if(!target){
+                target = flag.pos.findInRange(FIND_STRUCTURES,1,{
+                    filter:(structure) =>{
+                        return(
+                            (structure.structureType == STRUCTURE_CONTAINER
+                            ||structure.structureType == STRUCTURE_STORAGE
+                            ||structure.structureType == STRUCTURE_LINK)
+                            && structure.store[RESOURCE_ENERGY] > 0
+                        )
+                    }
+                })[0];
+                this.WithdrawFromTarget(creep, target);
+            }
+            else this.PickupTarget(creep,target);
         }
     },
     TransferTarget : function(creep,target){
@@ -100,7 +104,7 @@ var CreepsWay = {
         else{
             let target = creep.pos.findClosestByPath(FIND_STRUCTURES,{filter:(structure)=>{
                 return(structure.structureType==STRUCTURE_CONTAINER&&structure.hits<structure.hitsMax-1000)
-                    ||(structure.structureType==STRUCTURE_ROAD&&structure.hits<structure.hitsMax-1000)
+                    ||(structure.structureType==STRUCTURE_ROAD&&structure.hits<structure.hitsMax-100)
                     ||(structure.structureType==STRUCTURE_RAMPART&&structure.hits<120000)
                     ||(structure.structureType==STRUCTURE_TOWER&&structure.hits<structure.hitsMax)}
             });

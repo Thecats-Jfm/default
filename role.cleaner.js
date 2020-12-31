@@ -8,7 +8,15 @@ var RoleCleaner = {
             CreepsWay.CleanFlag(creep,flag);
         }
         else{
-            CreepsWay.TransferTarget(creep, flag.room.storage);
+            let target = creep.pos.findClosestByPath(FIND_STRUCTURES,{
+                filter:(structure)=>{
+                    return(structure.structureType == STRUCTURE_CONTAINER
+                        || structure.structureType == STRUCTURE_STORAGE
+                        || structure.structureType == STRUCTURE_LINK)
+                        && structure.store.getFreeCapacity(RESOURCE_ENERGY) >0
+                }
+            })
+            CreepsWay.TransferTarget(creep, target);
         }
     }
 }

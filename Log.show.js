@@ -1,4 +1,4 @@
-const Storages = ['5fec953cbf4373b9bafa9ef9','5fec90ebf4249296e189bfc7','5feababfdd025bc3ef8ea38f','5fe9df20d5294bb6df5699af']
+const Storages = ['5fec953cbf4373b9bafa9ef9','5fec90ebf4249296e189bfc7','5feababfdd025bc3ef8ea38f','5fed972c052d18a949910b0f','5fedba2846e31a709ca40d2d','5fe9df20d5294bb6df5699af']
 //C3 C2 C1 S1
 var LogShow = {
     ShowStorages: function(){

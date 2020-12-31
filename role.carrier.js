@@ -1,4 +1,5 @@
 var CreepsWay = require('Creeps.way');
+var flags = ['Ca1_S'];
 var roleCarrier = {
     run: function(creep,id){
 
@@ -6,7 +7,7 @@ var roleCarrier = {
 
 
         if(creep.store[RESOURCE_ENERGY]==0){
-            CreepsWay.WithdrawFromStorage(creep);
+            CreepsWay.WithdrawFromTarget(creep,creep.room.storage);
         }
         else{
             let target = creep.pos.findClosestByRange(FIND_STRUCTURES,{

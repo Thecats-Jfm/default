@@ -1,5 +1,5 @@
-const BuildFlagList = ['B1_R'];
-const SourceFlagList = ['B1_S'];
+const BuildFlagList = ['B1_R','B2_R'];
+const SourceFlagList = ['B1_S','B2_S'];
 const cfg = [0,0,0,0,0,0];
 var CreepsWay = require('Creeps.way');
 var roleBuilder = {
