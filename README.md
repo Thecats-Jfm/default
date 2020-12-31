@@ -58,6 +58,10 @@ From None to Controller
 
 From Storage to Controller
 
+## Solider_1
+
+守护旗子
+
 # Creeps.way
 
 注：所有使用flag的方法应当支持跨房间。

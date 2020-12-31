@@ -74,7 +74,7 @@ var CreepsWay = {
             if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
             else if(ret!=0) creep.say('b Er:',ret);
         }
-        else creep.say("b Nf");
+        else console.log('bnf');
     },
     RepairTarget : function(creep, target){
         if(target){
@@ -101,14 +101,14 @@ var CreepsWay = {
             let target = creep.pos.findClosestByPath(FIND_STRUCTURES,{filter:(structure)=>{
                 return(structure.structureType==STRUCTURE_CONTAINER&&structure.hits<structure.hitsMax-1000)
                     ||(structure.structureType==STRUCTURE_ROAD&&structure.hits<structure.hitsMax-1000)
-                    ||(structure.structureType==STRUCTURE_RAMPART&&structure.hits<100000)
+                    ||(structure.structureType==STRUCTURE_RAMPART&&structure.hits<120000)
                     ||(structure.structureType==STRUCTURE_TOWER&&structure.hits<structure.hitsMax)}
             });
             this.RepairTarget(creep,target);
         }
     },
     HarvestFlag: function(creep,flag){
-        if(flag.room!=creep.room) creep.moveTo(flag);
+        if(flag.pos.isEqualTo(creep.pos)==false) creep.moveTo(flag);
         else{
             let target = flag.pos.findInRange(FIND_SOURCES, 1)[0];
             let ret =creep.harvest(target,RESOURCE_ENERGY);
@@ -123,6 +123,23 @@ var CreepsWay = {
             let ret = creep.upgradeController(target);
             if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
             else if(ret!=0) creep.say('Er: '+ret);
+        }
+    },
+    PickupTarget: function(creep,target){
+        if(target){
+            let ret = creep.pickup(target);
+            if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
+            else if(ret!=0) creep.say('Er: '+ret);
+        }
+        else creep.say('clean');
+    },
+    CleanFlag: function(creep,flag){
+        if(flag.room!=creep.room) creep.moveTo(flag);
+        else{
+            let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES,{
+                filter:(resource)=>resource.amount>49
+            })
+            this.PickupTarget(creep,target);
         }
     }
 
