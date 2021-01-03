@@ -7,10 +7,11 @@ var RoleCleaner = require('role.cleaner');
 var RoleHarvester = require('role.harvester');
 var RoleRepairer = require('role.repairer');
 var RoleSoldier_1 = require('role.soldier_1');
+var RoleSoldier_2 = require('role.soldier_2');
 var RoleTransmitter = require('role.transmitter');
 var RoleUpgrader = require('role.upgrader');
 var RoomsAct = require('Rooms.act');
-var LogShow = require('Log.show')
+var LogShow = require('Log.show');
 var CreepsGenerator = require('Creeps.generator');
 var MemoryClear = require('memory.clear');
 module.exports.loop = function () {
@@ -89,6 +90,11 @@ module.exports.loop = function () {
 			creep.memory.dontPullMe = true;
 			RoleSoldier_1.Control(creep,tid);
 		}
+		else if(creep.memory.role == 'soldier2'){
+			let tid = id[11]++;
+			creep.memory.dontPullMe = true;
+			RoleSoldier_2.Run(creep,tid);
+		}
 		else {
 			console.log("Creep Role Error");
 		}
@@ -96,4 +102,4 @@ module.exports.loop = function () {
 
 	}
 }
-const MyRooms = ['E26N8',];
+const MyRooms = ['E26N8','E27N7'];

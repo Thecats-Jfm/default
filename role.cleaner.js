@@ -1,10 +1,10 @@
 var CreepsWay = require('Creeps.way');
 const cfg = [0,1,2]
-const Flag = ['C1_R','C2_R']
+const Flag = ['C1_R','C2_R','C3_R']
 var RoleCleaner = {
     run: function(creep,id){
         let flag = Game.flags[Flag[cfg[id]]];
-        if(creep.store[RESOURCE_ENERGY]==0){
+        if(creep.store.getUsedCapacity()==0){
             CreepsWay.CleanFlag(creep,flag);
         }
         else{
@@ -13,7 +13,7 @@ var RoleCleaner = {
                     return(structure.structureType == STRUCTURE_CONTAINER
                         || structure.structureType == STRUCTURE_STORAGE
                         || structure.structureType == STRUCTURE_LINK)
-                        && structure.store.getFreeCapacity(RESOURCE_ENERGY) >0
+                        && structure.store.getFreeCapacity() >0
                 }
             })
             CreepsWay.TransferTarget(creep, target);

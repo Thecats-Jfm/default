@@ -1,5 +1,5 @@
 const cfg = [0,1,2,3,4,5];
-const SourceFlagList = ['Energy1', 'Energy2','Energy3','Energy4','Energy5'];
+const SourceFlagList = ['Energy1', 'Energy2','Energy3','Energy4','Energy5','Mineral1'];
 var CreepsWay = require('Creeps.way');
 var roleHarvester = {
     run: function(creep,id){

@@ -1,5 +1,5 @@
 var CreepsWay = require("Creeps.way");
-const cfg = [0,1,2,2];
+const cfg = [0,1,2,2,2];
 const RepairFlag = ['R1_R','R2_R','R3_R','R4_R','R5_R'];
 const RepairStorage = ['R1_S','R2_S','R3_S','R4_S'];
 var roleRepairer = {

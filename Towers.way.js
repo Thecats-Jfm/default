@@ -3,9 +3,9 @@ var TowerWay = {
     RepairClosest(tower){
         let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES,{
             filter:(structure) => {
-                return structure.hits<= structure.hitsMax*0.8
-                    && structure.structureType != STRUCTURE_WALL
-                    && structure.structureType != STRUCTURE_RAMPART
+                return (structure.hits< structure.hitsMax*0.2 && structure.structureType != STRUCTURE_WALL && structure.structureType != STRUCTURE_RAMPART )
+                    ||(structure.structureType ==STRUCTURE_RAMPART && structure.hits<10000)
+                    ||(structure.structureType== STRUCTURE_WALL && structure.hits<10000)
             }
         })
         if(closestDamagedStructure) {

@@ -1,98 +1,27 @@
-require('Out.super_move');
-var CreepsWay = require('Creeps.way');
-var RoleBuilder = require('role.builder');
-var RoleCarrier = require('role.carrier');
-var RoleClaim = require('role.claimer');
-var RoleHarvester = require('role.harvester');
-var roleRemoteHarvester = require('role.remoteharvester');
-var RoleRepairer = require('role.repairer');
-var RoleTransmitter = require('role.transmitter');
-var RoleUpgrader = require('role.upgrader');
-var RoomsAct = require('Rooms.act');
-var LogShow = require('Log.show')
-var CreepsGenerator = require('Creeps.generator');
-var MemoryClear = require('memory.clear');
-module.exports.loop = function () {
-
-
-    MemoryClear.run();
-    CreepsGenerator.run(); //7 to do
-
-    for (let i in MyRooms) RoomsAct.run(Game.rooms[MyRooms[i]]);
-    // LogShow.run();
-
-	var id = [0,0,0,0,0,0,0,0];
-	for(var name in Game.creeps){
-		var creep = Game.creeps[name];
-		if(creep.memory.role == 'attacker'){
-            let tid = id[0]; ++id[0];
-			creep.say("PAY!");
-			creep.moveTo(Game.flags['0_0']);
-			let target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            creep.attack(target);
-
-
-		}
-		else if(creep.memory.role == 'builder'){
-            RoleBuilder.run(creep);
-            let tid = id[1]; ++id[1];
-			//CreepsWay.MoveToFlag(creep,Game.flags['0_0']);
-		}
-		else if(creep.memory.role == 'carrier'){
-            let tid = id[2]; ++id[2];
-			RoleCarrier.run(creep);
-		}
-		else if(creep.memory.role == 'claimer'){
-			creep.say("hi");
-			creep.memory.dontPullMe = true;
-			RoleClaim.Reserve(creep,Game.flags['Farm1_Controller']);
-			// creep.signController(Game.flags['Farm1_Controller'].room.controller,"I'm A SMALL WEAK CUTE CAT! Don't F**K ME PLZ! QwQ");
-		}
-		else if(creep.memory.role == 'harvester'){
-			id++;
-			creep.memory.dontPullMe = true;
-			RoleHarvester.run(creep,id);
-		}
-		else if(creep.memory.role == 'remoteharvester'){
-			creep.say("RH");
-			creep.memory.dontPullMe = true;
-			let tp = Game.getObjectById('5feababfdd025bc3ef8ea38f');
-			let tp2 = Game.getObjectById('')
-			if(tp.hits<tp.hitsMax&&creep.store[RESOURCE_ENERGY]>0){
-				creep.say('repair');
-				CreepsWay.RepairTarget(creep,tp);
-			}
-			else {
-
-			}roleRemoteHarvester.run(creep);
-		}
-		else if(creep.memory.role == 'repairer'){
-			RoleRepairer.run(creep);
-		}
-		else if(creep.memory.role == 'transmitter'){
-			RoleTransmitter.run(creep,t_id);
-			// creep.moveTo(Game.flags['0_0']);
-			t_id += 1;
-		}
-		else if(creep.memory.role == 'upgrader'){
-			RoleUpgrader.run(creep);
-		}
-		else if(creep.memory.role =='cleaner'){
-			// creep.say(Game.flags['0_0']);
-			//  creep.moveTo(Game.flags['0_0'],{visualizePathStyle:{opacity:1}})
-			// creep.attackController(creep.room.controller);
-			// creep.say(creep.moveTo(Game.flags['0_0']));
-			// let target = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES);
-			// let ret = creep.dismantle(target);
-			// if(ret == ERR_NOT_IN_RANGE) creep.moveTo(target);
-			// creep.say(ret);
-			console.log("Cleaner Error");
-		}
-		else {
-			console.log("Creep Role Error");
-		}
-
-
-	}
+// var CreepsWay = require('Creeps.way');
+const FlagList = {
+	'T1_S':'T1_E',
+	'T2_S':'T2_E',
+	'T3_S':'T3_E',
+	'T4_S':'T4_E',
+	'T5_S':'T5_E',
+	'T6_S':'T6_E',
+	'T7_S':'T7_E',
+	'T8_S':'T8_E'
 }
-const MyRooms = ['E26N8',];
+const cfg = [0,1,1,1,2,
+			 2,2,2,3,3,
+			 3,3,5,5,5,
+			 5,0,0,0,0];
+
+
+var roleTransmitter = {
+    run: function(creep,nid){
+		let flag = Game.flags[]
+        if(creep.store.getFreeCapacity(RESOURCE_ENERGY)!=0) CreepsWay.WithdrawFromFlag(creep,Game.flags[StartFlagList[cfg[nid]]]);
+        else CreepsWay.TransferToFlag(creep,Game.flags[EndFlagList[cfg[nid]]]);
+    }
+}
+
+module.exports = roleTransmitter;
+console.log(FlagList);

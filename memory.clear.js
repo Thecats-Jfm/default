@@ -1,21 +1,29 @@
-var Generator  =require('Creeps.generator');
+var harvester_set = [WORK,WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE];
+var upgrader_set = [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE];
+var spawnList = ['Spawn0','Spawn2_1'];
 var My_Clear = {
     run: function(){
         for(let name in Memory.creeps){
             if(!Game.creeps[name]){
                 if(Memory.creeps[name].role == 'harvester'){
-                    console.log('Harvester died');
                     let id = Memory.creeps[name].id;
-                    let ret = Game.spawns['Spawn0'].spawnCreep([WORK,WORK,WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE],'harvester_'+Game.time,{memory:{role:'harvester',id:id}});
+                    console.log('Harvester '+ id + 'died');
+                    let ret = this.TrySpawn(harvester_set,'harvester_'+Game.time,'harvester',id);
                     if(ret == 0){
                         console.log('Spawn Harvester Successfully with id: ',id);
                         delete(Memory.creeps[name]);
                     }
                 }
-                if(Memory.creeps[name].role == 'upgrader'){
-                    console.log('Upgrader died');
+                else if(Memory.creeps[name].role == 'upgrader'){
+
                     let id = Memory.creeps[name].id;
-                    let ret = Game.spawns['Spawn0'].spawnCreep(Generator.upgrader_set,'upgrader_'+Game.time,{memory:{role:'upgrader',id:id}});
+                    console.log('Upgrader'+id+' died');
+                    if(id>=2){
+                        delete (Memory.creeps[name]);
+                        console.log("Delete");
+                        return ;
+                    }
+                    let ret = this.TrySpawn(upgrader_set,'upgrader_'+Game.time,'upgrader',id);
                     if(ret == 0){
                         console.log('Spawn Upgrader Successfully with id: ',id);
                         delete(Memory.creeps[name]);
@@ -27,6 +35,17 @@ var My_Clear = {
                 }
             }
         }
+    },
+    TrySpawn:function(set_,name,role,id){
+        for(let i in spawnList){
+            let sp = spawnList[i];
+            let ret = Game.spawns[sp].spawnCreep(set_,name,{memory:{role:role,id:id}});
+            if(ret==0){
+                console.log(sp+' successfully spawn '+name);
+                return 0;
+            }
+        }
+        return -1;
     }
 }
 module.exports = My_Clear
