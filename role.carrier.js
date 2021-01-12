@@ -1,6 +1,6 @@
 var CreepsWay = require('Creeps.way');
 var flags = ['Ca1_S' ,'Ca2_S' ,'Ca3_S'];
-const cfg = [0,0,0,1,1]
+const cfg = [0,0,1,1,1]
 var roleCarrier = {
     run: function(creep,id){
         // console.log(creep.pos);

@@ -37,8 +37,8 @@ var CreepsWay = {
                 target = flag.pos.findInRange(FIND_STRUCTURES,1,{
                     filter:(structure) =>{
                         return(
-                            ((structure.structureType == STRUCTURE_CONTAINER ||structure.structureType == STRUCTURE_STORAGE) && structure.store.getUsedCapacity() > 0)
-                            ||(structure.structureType == STRUCTURE_LINK && structure.store.getUsedCapacity(RESOURCE_ENERGY)>0)
+                            (structure.structureType == STRUCTURE_LINK && structure.store.getUsedCapacity(RESOURCE_ENERGY)>0)
+                            ||((structure.structureType == STRUCTURE_CONTAINER ||structure.structureType == STRUCTURE_STORAGE) && structure.store.getUsedCapacity() > 0)
                         )
                     }
                 })[0];
@@ -51,6 +51,7 @@ var CreepsWay = {
         if(target){
             if(creep.pos.getRangeTo(target)>1) {creep.moveTo(target); return;}
             for(const resourceType in creep.store) {
+                if(resourceType!=RESOURCE_ENERGY&&target.structureType==STRUCTURE_LINK) continue;
                 let ret = creep.transfer(target, resourceType);
                 if(ret!=0) creep.say('TF Er:',ret);
             }
@@ -65,6 +66,7 @@ var CreepsWay = {
                     return(
                         (structure.structureType == STRUCTURE_CONTAINER
                         ||structure.structureType == STRUCTURE_STORAGE
+                        || structure.structureType == STRUCTURE_TERMINAL
                         ||structure.structureType == STRUCTURE_LINK)
                          && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
                     )
@@ -103,12 +105,12 @@ var CreepsWay = {
     RepairFlagRoom: function(creep,flag){
         if(flag.room != creep.room) creep.moveTo(flag);
         else{
-            let target = creep.pos.findClosestByPath(FIND_STRUCTURES,{filter:(structure)=>{
+            let target = creep.pos.findClosestByRange(FIND_STRUCTURES,{filter:(structure)=>{
                 return(structure.structureType==STRUCTURE_CONTAINER&&structure.hits<structure.hitsMax-1000)
                     ||(structure.structureType==STRUCTURE_ROAD&&structure.hits<structure.hitsMax-100)
-                    ||(structure.structureType==STRUCTURE_RAMPART&&structure.hits<120000)
+                    ||(structure.structureType==STRUCTURE_RAMPART&&structure.hits<300000)
                     ||(structure.structureType==STRUCTURE_TOWER&&structure.hits<structure.hitsMax)
-                    ||(structure.structureType==STRUCTURE_WALL&&structure.hits<120000)
+                    ||(structure.structureType==STRUCTURE_WALL&&structure.hits<300000)
                 }
             });
             this.RepairTarget(creep,target);

@@ -13,6 +13,7 @@ var SoldierControl = {
         }
         let hostiles = room.find(FIND_HOSTILE_CREEPS);
         if(hostiles.length){
+            console.log(hostiles.length)
             this.ATTACKENEMY(creep);
             return ;
         }

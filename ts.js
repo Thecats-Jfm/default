@@ -1,27 +1,14 @@
-// var CreepsWay = require('Creeps.way');
-const FlagList = {
-	'T1_S':'T1_E',
-	'T2_S':'T2_E',
-	'T3_S':'T3_E',
-	'T4_S':'T4_E',
-	'T5_S':'T5_E',
-	'T6_S':'T6_E',
-	'T7_S':'T7_E',
-	'T8_S':'T8_E'
-}
-const cfg = [0,1,1,1,2,
-			 2,2,2,3,3,
-			 3,3,5,5,5,
-			 5,0,0,0,0];
-
-
-var roleTransmitter = {
-    run: function(creep,nid){
-		let flag = Game.flags[]
-        if(creep.store.getFreeCapacity(RESOURCE_ENERGY)!=0) CreepsWay.WithdrawFromFlag(creep,Game.flags[StartFlagList[cfg[nid]]]);
-        else CreepsWay.TransferToFlag(creep,Game.flags[EndFlagList[cfg[nid]]]);
+else if(Memory.creeps[name].role == 'claimer'){
+    let id = Memory.creeps[name].id;
+    console.log('Claimer'+id+' died');
+    if(id>=3){
+        delete (Memory.creeps[name]);
+        console.log("Delete");
+        return ;
+    }
+    let ret = this.TrySpawn(claimer_set,'claimer_'+Game.time,'claimer',id);
+    if(ret == 0){
+        console.log('Spawn Claimer Successfully with id: ',id);
+        delete(Memory.creeps[name]);
     }
 }
-
-module.exports = roleTransmitter;
-console.log(FlagList);

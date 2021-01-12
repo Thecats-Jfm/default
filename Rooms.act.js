@@ -10,10 +10,6 @@ var RoomsAct = {
             console.log('Hostile\'s owner is ' + hostiles[0].owner.username);
         }
         TowersAct.run(room);
-        let link1 = Game.getObjectById(links[0]),link2 = Game.getObjectById(links[1]);
-        if(link1.store.getFreeCapacity(RESOURCE_ENERGY)<=200&&link2.store[RESOURCE_ENERGY]==0){
-            link1.transferEnergy(link2);
-        }
     }
 }
 module.exports = RoomsAct;

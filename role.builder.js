@@ -1,6 +1,6 @@
 const BuildFlagList = ['B1_R','B2_R'];
 const SourceFlagList = ['B1_S','B2_S'];
-const cfg = [0,0,0,0,0,0];
+const cfg = [0,0,1,1,0,0];
 var CreepsWay = require('Creeps.way');
 var roleBuilder = {
     run: function(creep,id){
