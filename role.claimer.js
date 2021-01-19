@@ -1,5 +1,5 @@
-const TargetFlag = ['E27N8','E25N7','E26N7'];
-const text = "I'm a small weak cute cat! Don't f**k me plz! QwQ"
+const TargetFlag = ['E27N8','E28N7','E26N7','E25N7'];
+const text = "I'm a small weak cute cat! Don't f**k me plz! QwQ ||code on https://github.com/Thecats-Jfm/screeps"
 var roleClaimer = {
     Reserve: function(creep,id){
         if(creep.memory.id==undefined) creep.memory.id = id;

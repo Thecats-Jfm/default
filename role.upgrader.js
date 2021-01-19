@@ -1,5 +1,5 @@
 var CreepsWay = require("Creeps.way");
-const cfg = [0,0,0,1,0,0];
+const cfg = [1,0,0,0,0,1,0,0];
 const TargetFlag = ['Home1','Home2'];
 const StorageFlagList = ['U1_S','U2_S'];
 var roleUpgrader = {

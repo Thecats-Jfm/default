@@ -7,19 +7,13 @@ var Dismantler ={
     Run:function(creep,id){
         let flag = Game.flags[DisFlags[cfg[id]]];
         if(creep.room!=flag.room) creep.moveTo(flag);
-        else{
-            var target = creep.room.find(FIND_STRUCTURES,{filter:(structure)=>structure.structureType==STRUCTURE_LINK})[0]
-            if(!target){
-                if(creep.pos.getRangeTo(flag)>1) creep.moveTo(flag);
-                else creep.say("clear");
-            }
-            else{
-                let ret = creep.dismantle(target);
-                if(ret==ERR_NOT_IN_RANGE) creep.moveTo(target);
-                else if(ret == 0) creep.say("Dismantle!");
-                else creep.say("Er:"+ret);
-            }
+        else {
+            let target = Game.getObjectById('5f2883d1bf58521e603c90d9')
+            if(target == undefined) {creep.say('no target');return;}
+            let ret = creep.dismantle(target)
+            if(ret==ERR_NOT_IN_RANGE) creep.moveTo(target)
         }
+
     }
 }
 module.exports = Dismantler;

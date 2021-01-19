@@ -23,6 +23,7 @@ var CreepsWay = {
             if(creep.pos.getRangeTo(target)>1) {creep.moveTo(target); return;}
             for(const resourceType in target.store) {
                 if(target.structureType == STRUCTURE_STORAGE && resourceType != RESOURCE_ENERGY) continue;
+                if(target.structureType == STRUCTURE_TERMINAL && resourceType != RESOURCE_ENERGY) continue;
                 let ret = creep.withdraw(target, resourceType);
                 if(ret!=0) creep.say('WD Er:'+ret);
             }
@@ -38,10 +39,17 @@ var CreepsWay = {
                     filter:(structure) =>{
                         return(
                             (structure.structureType == STRUCTURE_LINK && structure.store.getUsedCapacity(RESOURCE_ENERGY)>0)
-                            ||((structure.structureType == STRUCTURE_CONTAINER ||structure.structureType == STRUCTURE_STORAGE) && structure.store.getUsedCapacity() > 0)
+                            ||((structure.structureType == STRUCTURE_CONTAINER ||structure.structureType == STRUCTURE_STORAGE||structure.structureType==STRUCTURE_TERMINAL) && structure.store.getUsedCapacity() > 0)
                         )
                     }
                 })[0];
+                if(!target){
+                    target = flag.pos.findInRange(FIND_RUINS,1,{
+                        filter:(structure)=>{
+                            return structure.store.getUsedCapacity()>0
+                        }
+                    })[0]
+                }
                 this.WithdrawFromTarget(creep, target);
             }
             else this.PickupTarget(creep,target);
@@ -146,7 +154,7 @@ var CreepsWay = {
     CleanFlag: function(creep,flag){
         if(flag.room!=creep.room) creep.moveTo(flag);
         else{
-            let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES,{
+            let target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES,{
                 filter:(resource)=>resource.amount>10
             })
             this.PickupTarget(creep,target);

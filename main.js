@@ -27,8 +27,7 @@ module.exports.loop = function () {
 	LabsWay.run1()
 	LinksWay.run1() //
     for (let i in MyRooms) RoomsAct.run(Game.rooms[MyRooms[i]]);
-    if(Game.time%3==0) LogShow.ShowStorages();
-
+    if(Game.time%300==0) LogShow.ShowStorages();
 	var id = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	for(var name in Game.creeps){
 		var creep = Game.creeps[name];
@@ -65,7 +64,6 @@ module.exports.loop = function () {
 			console.log("RH Error");
 		}
 		else if(creep.memory.role == 'repairer'){
-			creep.say('r');
 			let tid = id[6]++;
 			RoleRepairer.run(creep,tid);
 		}
@@ -112,7 +110,7 @@ module.exports.loop = function () {
 		}
 		else if(creep.memory.role == 'my'){
 			if(creep.store.getFreeCapacity()==0){
-				let target = Game.getObjectById('5ff205ead734c64fa2dc661a')
+				let target = creep.room.terminal
 				for(let resourceType in creep.store){
 
 					let ret = creep.transfer(target,resourceType)
@@ -121,11 +119,19 @@ module.exports.loop = function () {
 				}
 			}
 			else{
-				let target = creep.room.terminal
-				let ret = creep.withdraw(target,"L")
+				let target = creep.room.storage
+				let ret = creep.withdraw(target,'energy')
 				if(ret==ERR_NOT_IN_RANGE) creep.moveTo(target)
 				if(ret==ERR_NOT_ENOUGH_RESOURCES) creep.say("Hi!")
 			}
+		}
+		else if(Memory.creeps[name].role == 'WA'){
+			creep.moveTo(Game.flags['WA'])
+			// creep.heal(creep)
+			// let target = Game.getObjectById('5f2431beb337c35714084b25')
+			// creep.rangedAttack(target)
+			// let ret = creep.dismantle(target)
+			console.log(creep.hits+'/'+creep.hitsMax)
 		}
 		else {
 			console.log("Creep Role Error");
