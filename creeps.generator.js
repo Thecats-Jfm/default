@@ -29,7 +29,7 @@ var upgrader_set = [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARR
 const SpawnList = ['Spawn0','Spawn2_1'];
 
 
-const LOG_ = true;
+const LOG_ = false;
 var LOG
 var Generator = {
     run: function(){
