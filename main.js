@@ -18,12 +18,12 @@ var RoleUpgrader = require('role.upgrader');
 var RoomsAct = require('Rooms.act');
 var LogShow = require('Log.show');
 var CreepsGenerator = require('Creeps.generator');
-var MemoryClear = require('memory.clear');
+var MemoryClear = require('Memory.clear');
 // Game.market.deal('5ffab9a674151e9cb7a4b50f',10000,'E26N8')
 module.exports.loop = function () {
 	Game.cpu.generatePixel();
     MemoryClear.run();
-	CreepsGenerator.run(); //7 to do
+	// CreepsGenerator.run(); //7 to do
 	LabsWay.run1()
 	LinksWay.run1() //
     for (let i in MyRooms) RoomsAct.run(Game.rooms[MyRooms[i]]);
@@ -133,6 +133,10 @@ module.exports.loop = function () {
 			// let ret = creep.dismantle(target)
 			console.log(creep.hits+'/'+creep.hitsMax)
 		}
+		else if(Memory.creeps[name].role == 'tp'){
+			creep.say('🌶')
+		}
+
 		else {
 			console.log("Creep Role Error");
 		}
