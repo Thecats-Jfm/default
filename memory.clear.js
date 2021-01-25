@@ -3,16 +3,16 @@ const DEBUG = true
 var My_Clear = {
     run: function () {
         var used = {
-            'Spawn0': true,
-            'Spawn2_1': true,
-            'Spawn1_2': true,
+            'Spawn0': false,
+            'Spawn2_1': false,
+            'Spawn1_2': false,
         }
         for (let name in Memory.creeps) {
             if (!Game.creeps[name]) {
                 let creep = Memory.creeps[name]
                 if (creep.spawn == undefined) {
-                    console.log('Memory.clear: ' + name + 'died and delete')
-                    delete(creep)
+                    console.log('Memory.clear: ' + name + ' died and delete')
+                    delete(Memory.creeps[name])
                 } else {
                     let spawn = creep.spawn,
                         body = creep.body,
@@ -39,7 +39,8 @@ var My_Clear = {
                     })
                     if (ret == 0) {
                         used[spawn] = true
-                        console.log('Memory.clear: ' + spawn + 'has spawned creep ' + uid)
+                        console.log('Memory.clear: ' + spawn + ' has spawned creep ' + uid)
+                        delete(Memory.creeps[name])
                     }
                 }
             }

@@ -115,7 +115,7 @@ var CreepsWay = {
         else{
             let target = creep.pos.findClosestByRange(FIND_STRUCTURES,{filter:(structure)=>{
                 return(structure.structureType==STRUCTURE_CONTAINER&&structure.hits<structure.hitsMax-1000)
-                    ||(structure.structureType==STRUCTURE_ROAD&&structure.hits<structure.hitsMax-100)
+                    ||(structure.structureType==STRUCTURE_ROAD&&structure.hits<structure.hitsMax-1000)
                     ||(structure.structureType==STRUCTURE_RAMPART&&structure.hits<300000)
                     ||(structure.structureType==STRUCTURE_TOWER&&structure.hits<structure.hitsMax)
                     ||(structure.structureType==STRUCTURE_WALL&&structure.hits<300000)

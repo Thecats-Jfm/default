@@ -1,12 +1,10 @@
 var CreepsWay = require('Creeps.way');
-var flags = ['Ca1_S' ,'Ca2_S' ,'Ca3_S'];
-const cfg = [0,0,1,1,1]
+var flags = ['','Ca1_S' ,'Ca2_S' ,'Ca3_S'];
 var roleCarrier = {
-    run: function(creep,id){
-        // console.log(creep.pos);
+    run: function(creep){
         creep.say("qwq");
-        creep.memory.id = id;
-        let flag = Game.flags[flags[cfg[creep.memory.id]]];
+        let nid = creep.memory.id
+        let flag = Game.flags[flags[nid]];
         if(creep.store[RESOURCE_ENERGY]==0){
             CreepsWay.WithdrawFromFlag(creep,flag);
         }

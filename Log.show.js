@@ -1,7 +1,7 @@
 const Storages = {
 	'container1_1':'5fec953cbf4373b9bafa9ef9',
 	'container1_2':'5fec90ebf4249296e189bfc7',
-	'container2_1':'5ff14a78741c31b5ed109bdf',
+	'container2_1':'6000796ccc9d227589084685',
 	'container3_1':'5fed972c052d18a949910b0f',
     'container3_2':'5fedba2846e31a709ca40d2d',
     'storage1':'5fe9df20d5294bb6df5699af',
