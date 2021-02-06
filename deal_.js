@@ -1,7 +1,7 @@
 Game.market.createOrder({
     type: ORDER_SELL,
     resourceType: RESOURCE_POWER,
-    price: 36,
+    price: 35.3,
     totalAmount: 10000,
     roomName: "E26N8"
 });
