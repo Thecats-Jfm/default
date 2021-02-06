@@ -102,4 +102,4 @@ module.exports.loop = function () {
 
 	}
 }
-const MyRooms = ['E26N8', 'E27N7'];
+const MyRooms = ['E26N8', 'E27N7', 'E23N9'];
