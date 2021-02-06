@@ -1,5 +1,3 @@
-const BuildFlagList = ['', 'B1_R', 'B2_R'];
-const SourceFlagList = ['', 'B1_S', 'B2_S'];
 var CreepsWay = require('Creeps.way');
 var roleBuilder = {
     run: function (creep) {
