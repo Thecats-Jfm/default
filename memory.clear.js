@@ -21,6 +21,7 @@ var My_Clear = {
                         uid = creep.uid
                     if (spawn == undefined || body == undefined || role == undefined || id == undefined || uid == undefined) {
                         console.log('Memory.clear: Error in [=_=]')
+                        continue
                         break
                     }
                     // tips: spawn name error

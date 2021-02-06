@@ -6,9 +6,9 @@ var roleTransmitter = {
         let id = creep.memory.id
         creep.say('t'+ id)
         if(creep.store.getUsedCapacity()==0){
-            CreepsWay.WithdrawFromFlag(creep,Game.flags[StartFlagList[id]]);
+            CreepsWay.WithdrawFromFlag(creep,Game.flags['T'+id+'_S']);
         }
-        else CreepsWay.TransferToFlag(creep,Game.flags[EndFlagList[id]]);
+        else CreepsWay.TransferToFlag(creep,Game.flags['T'+id+'_E']);
     }
 }
 

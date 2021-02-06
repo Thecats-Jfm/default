@@ -1,8 +1,7 @@
 var CreepsWay = require('Creeps.way');
-const Flag = ['', 'C1_R', 'C2_R', 'C3_R']
 var RoleCleaner = {
     run: function (creep) {
-        let flag = Game.flags[Flag[creep.memory.id]];
+        let flag = Game.flags['C'+creep.memory.id+'_R'];
         if (creep.room != flag.room) {
             creep.moveTo(flag);
             creep.say("赶路中");
