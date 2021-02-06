@@ -184,7 +184,7 @@ uid = {
             spawn = 'Spawn0',
             role = 'transmitter',
             id = 7,
-            body = [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, ]
+            body = [CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, ]
         }
     },
     22: {
@@ -202,7 +202,7 @@ uid = {
             spawn = 'Spawn2_1',
             role = 'upgrader',
             id = 2,
-            body = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE]
+            body = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE]
         }
     },
     24: {
@@ -219,7 +219,7 @@ uid = {
     25: {
         memory: {
             uid = 25,
-            spawn = 'Spawn1_2',
+            spawn = 'Spawn3',
             role = 'harvester',
             id = 6,
             body = [WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE]
@@ -228,29 +228,165 @@ uid = {
     26: {
         memory: {
             uid = 26,
-            spawn = 'Spawn1_2',
+            spawn = 'Spawn2_1',
             role = 'builder',
-            id = 1,
-            body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]
+            id = 3,
+            body = [MOVE, MOVE, CARRY, CARRY, WORK, WORK]
         }
-    },
-    100: {
+    }, //de
+    27: {
         memory: {
-            uid = 100,
-            spawn = 'Spawn1_2',
-            role = 'Big',
-            id = -1,
+            uid = 27,
+            spawn = 'Spawn3',
+            role = 'upgrader',
+            id = 3,
             body = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY,
-                MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+                MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
             ]
         }
-    }
+    },
+    28: {
+        memory: {
+            uid = 28,
+            spawn = 'Spawn3',
+            role = 'harvester',
+            id = 7,
+            body = [WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE]
+        }
+    },
+    29: {
+        memory: {
+            uid = 29,
+            spawn = 'Spawn3',
+            role = 'transmitter',
+            id = 9,
+            body = [MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, ]
+        }
+    },
+    30: {
+        memory: {
+            uid = 30,
+            spawn = 'Spawn1_2',
+            role = 'repairer',
+            id = 4,
+            body = [MOVE, CARRY, WORK, MOVE, CARRY, WORK, MOVE, CARRY, WORK, MOVE, CARRY, WORK, MOVE, CARRY, WORK, ]
+        }
+    },
+    31: {
+        memory: {
+            uid = 31,
+            spawn = 'Spawn3',
+            role = 'carrier',
+            id = 3,
+            body = [MOVE, CARRY, CARRY, MOVE, CARRY, CARRY,MOVE, CARRY, CARRY ]
+        }
+    },
+    32: {
+        memory: {
+            uid = 32,
+            spawn = 'Spawn0',
+            role = 'upgrader',
+            id = 1,
+            body = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE]
+        }
+    },
+    33: {
+        memory: {
+            uid = 33,
+            spawn = 'Spawn2_2',
+            role = 'harvester',
+            id = 8,
+            body = [WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE]
+        }
+    },
+    34: {
+        memory: {
+            uid = 34,
+            spawn = 'Spawn2_2',
+            role = 'harvester',
+            id = 9,
+            body = [WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE]
+        }
+    },
+    35: {
+        memory: {
+            uid = 35,
+            spawn = 'Spawn3',
+            role = 'cleaner',
+            id = 4,
+            body = [MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, ]
+        }
+    },
+    36: {
+        memory: {
+            uid = 36,
+            spawn = 'Spawn2_2',
+            role = 'claimer',
+            id = 2,
+            body = [CLAIM, CLAIM, MOVE, ]
+        }
+    },
+    37: {
+        memory: {
+            uid = 37,
+            spawn = 'Spawn2_2',
+            role = 'repairer',
+            id = 5,
+            body = [MOVE, CARRY, WORK, MOVE, CARRY, WORK, ]
+        }
+    },
+    38: {
+        memory: {
+            uid = 38,
+            spawn = 'Spawn2_2',
+            role = 'transmitter',
+            id = 10,
+            body = [MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, ]
+        }
+    },
+    39: {
+        memory: {
+            uid = 39,
+            spawn = 'Spawn2_2',
+            role = 'transmitter',
+            id = 11,
+            body = [MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, ]
+        }
+    },
+    40: {
+
+        memory: {
+            uid = 40,
+            spawn = 'Spawn2_2',
+            role = 'upgrader',
+            id = 2,
+            body = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE]
+        }
+
+    },
+    41: {
+        memory: {
+            uid = 41,
+            spawn = 'Spawn3',
+            role = 'upgrader',
+            id = 3,
+            body = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY,
+                MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+            ]
+        }
+    },
 }
-let uid = 26,
-    spawn = 'Spawn2_1',
-    role = 'builder',
-    id = 1,
-    body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
+// sum = 40
+
+
+
+let uid = 41,
+    spawn = 'Spawn3',
+    role = 'upgrader',
+    id = 3,
+    body = [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY,
+        MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+    ];
 Game.spawns[spawn].spawnCreep(body, role + '_' + Game.time, {
     memory: {
         spawn: spawn,
@@ -260,3 +396,4 @@ Game.spawns[spawn].spawnCreep(body, role + '_' + Game.time, {
         body: body
     }
 })
+//
